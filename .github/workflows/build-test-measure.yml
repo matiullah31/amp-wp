@@ -198,6 +198,9 @@ jobs:
           coverage: ${{ matrix.coverage }}
           tools: composer, cs2pr
 
+      - name: List PHP extensions
+        run: php -m
+
       - name: Shutdown default MySQL service
         run: sudo service mysql stop
 
