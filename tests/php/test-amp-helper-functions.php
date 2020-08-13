@@ -1554,6 +1554,7 @@ class Test_AMP_Helper_Functions extends WP_UnitTestCase {
 
 		/** This filter is documented in wp-admin/includes/class-custom-image-header.php */
 		$cropped = apply_filters( 'wp_create_file_in_uploads', $cropped, $attachment_id ); // For replication.
+		error_log( json_encode( $cropped, JSON_PRETTY_PRINT ) );
 		$object  = $wp_site_icon->create_attachment_object( $cropped, $attachment_id );
 		unset( $object['ID'] );
 
