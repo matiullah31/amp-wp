@@ -272,9 +272,6 @@ jobs:
         env:
           INSTALL_PWA_PLUGIN: ${{ matrix.install-pwa-plugin == true }}
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v2
-
       - name: Run tests
         if: ${{ matrix.coverage == 'none' }}
         run: vendor/bin/phpunit --filter PluginSuppressionTest::test_suppress_plugins_when_conditions_satisfied_for_all
