@@ -274,7 +274,7 @@ jobs:
 
       - name: Run tests
         if: ${{ matrix.coverage == 'none' }}
-        run: vendor/bin/phpunit --filter Test_AMP_Helper_Functions::test_amp_get_schemaorg_metadata
+        run: vendor/bin/phpunit
 
       - name: Run tests with coverage
         if: ${{ matrix.coverage == 'xdebug' }}
