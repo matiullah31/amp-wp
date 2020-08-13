@@ -344,6 +344,7 @@ final class PluginSuppressionTest extends WP_UnitTestCase {
 		$this->assert_plugin_suppressed_state( false, $bad_plugin_file_slugs );
 
 		$this->update_suppressed_plugins_option( array_fill_keys( $bad_plugin_file_slugs, true ) );
+		error_log( 'Options: ' . json_encode( get_option( AMP_Options_Manager::OPTION_NAME ), JSON_PRETTY_PRINT ) );
 		error_log( 'Suppressed plugins: ' . json_encode( AMP_Options_Manager::get_option( Option::SUPPRESSED_PLUGINS ), JSON_PRETTY_PRINT ) );
 		$this->assertTrue( is_amp_endpoint() );
 		$this->assertTrue( $instance->suppress_plugins() );
