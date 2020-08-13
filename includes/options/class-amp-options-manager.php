@@ -418,7 +418,11 @@ class AMP_Options_Manager {
 		$amp_options = self::get_options();
 
 		$amp_options[ $option ] = $value;
+
+		error_log( 'Updating: ' . $option );
+		error_log( 'Updated value: ' . json_encode( $amp_options[ $option ], JSON_PRETTY_PRINT ) );
 		return update_option( self::OPTION_NAME, $amp_options, false );
+		error_log( 'Options: ' . json_encode( self::get_option( self::OPTION_NAME ), JSON_PRETTY_PRINT ) );
 	}
 
 	/**
