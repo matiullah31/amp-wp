@@ -274,7 +274,7 @@ jobs:
 
       - name: Run tests
         if: ${{ matrix.coverage == 'none' }}
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --filter PluginSuppressionTest::test_suppress_plugins_when_conditions_satisfied_for_all
 
       - name: Run tests with coverage
         if: ${{ matrix.coverage == 'xdebug' }}

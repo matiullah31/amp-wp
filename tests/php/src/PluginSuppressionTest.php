@@ -334,16 +334,19 @@ final class PluginSuppressionTest extends WP_UnitTestCase {
 	public function test_suppress_plugins_when_conditions_satisfied_for_all() {
 		$url = home_url( '/' );
 		AMP_Options_Manager::update_option( Option::THEME_SUPPORT, AMP_Theme_Support::STANDARD_MODE_SLUG );
+		error_log( 'Theme support: ' . AMP_Options_Manager::get_option( Option::THEME_SUPPORT ) );
 		$this->init_plugins();
 
 		$bad_plugin_file_slugs = $this->get_bad_plugin_file_slugs();
 		$this->assertGreaterThan( 0, $bad_plugin_file_slugs );
 		$this->populate_validation_errors( $url, $bad_plugin_file_slugs );
+		error_log( 'Validation errors: ' . json_encode( AMP_Validated_URL_Post_Type::get_invalid_url_validation_errors( $url ), JSON_PRETTY_PRINT ) );
 		$instance = $this->get_instance( true );
 		$this->go_to( $url );
 		$this->assert_plugin_suppressed_state( false, $bad_plugin_file_slugs );
 
 		$this->update_suppressed_plugins_option( array_fill_keys( $bad_plugin_file_slugs, true ) );
+		error_log( 'Suppressed plugins: ' . json_encode( AMP_Options_Manager::get_option( Option::SUPPRESSED_PLUGINS ), JSON_PRETTY_PRINT ) );
 		$this->assertTrue( is_amp_endpoint() );
 		$this->assertTrue( $instance->suppress_plugins() );
 		$this->assert_plugin_suppressed_state( true, $bad_plugin_file_slugs );
